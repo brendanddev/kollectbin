@@ -10,4 +10,6 @@ export interface Comic {
     variantArtist?: string;
 }
 
-export let comics: Comic[] = [];
+export type CreateComicInput = Omit<Comic, 'id'>;
+
+export type UpdateComicInput = CreateComicInput;

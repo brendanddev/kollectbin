@@ -1,21 +1,38 @@
 import type { Request, Response, NextFunction } from 'express';
-import type { Comic } from '../types/comic.js';
-import { comics } from '../types/comic.js';
+import type { CreateComicInput } from '../types/comic.js';
+import { findAllComics, createComic as insertComic } from '../models/comic.model.js';
 
-export const createComic = (req: Request, res: Response, next: NextFunction) => {
+export const createComic = async (
+    req: Request, 
+    res: Response, 
+    next: NextFunction
+) => {
     try {
-        const { title, issue, volume, author, publisher } = req.body;
-        // const newComic: Comic = { id: Date.now(), title, issue, volume, author, publisher };
-        // comics.push(newComic);
-        // return res.status(201).json(newComic);
+        const newComicInput: CreateComicInput = {
+            title: req.body.title,
+            issue: req.body.issue,
+            volume: req.body.volume,
+            author: req.body.author,
+            publisher: req.body.publisher,
+            genre: req.body.genre,
+            isVariant: req.body.isVariant,
+            variantArtist: req.body.variantArtist
+        };
+        const newComic = await insertComic(newComicInput);
+        return res.status(201).json({ status: "success", comic: newComic });
     } catch (error) {
         next(error);
     }
 };
 
-export const getComics = (req: Request, res: Response, next: NextFunction) => {
+export const getAllComics = async (
+    req: Request, 
+    res: Response, 
+    next: NextFunction
+) => {
     try {
-        return res.status(200).json(comics);
+        const allComics = await findAllComics();
+        return res.status(200).json(allComics);
     } catch (error) {
         next(error);
     }

@@ -1,0 +1,24 @@
+{
+  "name": "kollectbin",
+  "version": "0.1.0",
+  "description": "A personal collection API for comics.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/brendanddev/kollectbin.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/brendanddev/kollectbin/issues"
+  },
+  "homepage": "https://github.com/brendanddev/kollectbin#readme",
+  "devDependencies": {
+    "typescript": "^7.0.2"
+  }
+}

@@ -1,32 +1,4 @@
-
-# Shop location data
-shops.json
-
-# Exported comic collection files
-/comics_export_*.json
-/comics_export_*.csv
-
-# Node.js
 node_modules/
 .env
-npm-debug.log*
-
-# Maven build output
-target/
-
-# IntelliJ IDEA
-.idea/
-*.iml
-
-# VS Code
-.vscode/
-
-# macOS
 .DS_Store
-
-# Windows
-Thumbs.db
-
-# JetBrains default
-/shelf/
-/workspace.xml
+dist/

@@ -1,9 +1,11 @@
 {
   "name": "kollectbin",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "A personal collection API for comics.",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
+    "build": "tsc",
+    "dev": "tsx src/server.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -13,12 +15,19 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "type": "commonjs",
+  "type": "module",
   "bugs": {
     "url": "https://github.com/brendanddev/kollectbin/issues"
   },
   "homepage": "https://github.com/brendanddev/kollectbin#readme",
   "devDependencies": {
+    "@types/express": "^5.0.6",
+    "@types/node": "^22.20.2",
+    "tsx": "^4.23.13",
     "typescript": "^7.0.2"
+  },
+  "dependencies": {
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1"
   }
 }

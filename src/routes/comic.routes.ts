@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { createComic, getComics } from "../controllers/comicController.js";
+import { createComic, getComics } from "../controllers/comic.controller.js";
 
 const router = Router();
 

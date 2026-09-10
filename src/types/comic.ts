@@ -5,8 +5,9 @@ export interface Comic {
     volume: number;
     author: string;
     publisher: string;
-    // genre: string;
-    // isVariant: boolean;
+    genre: string;
+    isVariant: boolean;
+    variantArtist?: string;
 }
 
 export let comics: Comic[] = [];

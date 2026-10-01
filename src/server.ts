@@ -1,5 +1,5 @@
 import express, { type Application, type Request, type Response } from "express";
-import { PORT } from "./config.js";
+import { PORT } from "./config/config.js";
 import { deleteComic, getAllComics, getComicById, insertComic, updateComic } from "./db.js";
 import type { ComicInput, UpdateComic } from "./types/comic.js";
 

@@ -1,6 +1,6 @@
 import sqlite3 from "sqlite3";
 import { open, Database } from "sqlite";
-import { DATABASE_NAME } from "./config.js";
+import { DATABASE_NAME } from "./config/config.js";
 import type { Comic, ComicInput, UpdateComic } from "./types/comic.js";
 
 let db: Database | null = null;

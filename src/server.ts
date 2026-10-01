@@ -1,13 +1,24 @@
-import express, { type Application, type Request, type Response } from "express";
+import path from "path";
+import express from "express";
+import mustacheExpress from "mustache-express";
+import { type Application, type Request, type Response } from "express";
 import { PORT } from "./config/config.js";
 import { deleteComic, getAllComics, getComicById, insertComic, updateComic } from "./db.js";
 import type { ComicInput, UpdateComic } from "./types/comic.js";
 
+const __dirname = import.meta.dirname;
+
 const app: Application = express();
 app.use(express.json());
 
-app.get('/', (req: Request, res: Response): void => {
-    res.send('Hello, from Kollectbin!');
+// Configure mustache
+app.engine('mustache', mustacheExpress());
+app.set('view engine', 'mustache');
+app.set('views', path.join(__dirname, '..', 'src', 'views'));
+
+app.get('/', async (req: Request, res: Response): Promise<void> => {
+    const allComics = await getAllComics();
+    res.render('index', { allComics });
 });
 
 app.get('/comics', async (req: Request, res: Response): Promise<void> => {

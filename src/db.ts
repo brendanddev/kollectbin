@@ -12,7 +12,8 @@ export async function getDatabase(): Promise<Database> {
         filename: DATABASE_NAME,
         driver: sqlite3.Database
     });
-    createTable();
+    await createTable();
+    await seedDatabase();
     return db;
 };
 
@@ -29,6 +30,17 @@ async function createTable(): Promise<void> {
             year INTEGER,
             genre TEXT NOT NULL CHECK (genre IN ('Fantasy', 'Action', 'Mystery'))
         )
+    `);
+}
+
+async function seedDatabase(): Promise<void> {
+    const db = await getDatabase();
+    await db.run(`
+        INSERT INTO comics (title, volume, issue, author, publisher, year, genre)
+        VALUES
+            ('The Amazing Spider-Man', 1, 1, 'Stan Lee, Steve Ditko', 'Marvel', 1963, 'Action'),
+            ('Fantastic Four', 1, 1, 'Stan Lee, Jack Kirby', 'Marvel', 1961, 'Action'),
+            ('Daredevil', 1, 1, 'Stan Lee, Bill Everett', 'Marvel', 1964, 'Action')
     `);
 }
 

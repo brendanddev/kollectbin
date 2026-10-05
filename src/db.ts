@@ -16,7 +16,7 @@ export async function initDatabase(): Promise<Database> {
 
 export async function createTable(db: Database): Promise<void> {
     await db.exec(`
-        CREATE TABLE comics (
+        CREATE TABLE IF NOT EXISTS comics (
             id INTEGER PRIMARY KEY,
             title TEXT NOT NULL,
             volume INTEGER NOT NULL,

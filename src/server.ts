@@ -1,9 +1,8 @@
 import path from "path";
 import express from "express";
 import mustacheExpress from "mustache-express";
-import { type Application, type Request, type Response } from "express";
-import { PORT } from "./config/config.js";
-import type { ComicInput, UpdateComic } from "./types/comic.js";
+import { type Application } from "express";
+import { createComic, deleteExistingComic, editComic, getComic, getComics } from "./controllers/comic.js";
 
 const __dirname = import.meta.dirname;
 
@@ -15,6 +14,10 @@ app.engine('mustache', mustacheExpress());
 app.set('view engine', 'mustache');
 app.set('views', path.join(__dirname, '..', 'src', 'views'));
 
-app.listen(PORT, () => {
-    console.log(`Server is running on http://localhost:${PORT}`);
-});
+app.get("/api/comics", getComics);
+app.get("/api/comics/:id", getComic);
+app.post("/api/comics", createComic);
+app.put("/api/comics/:id", editComic);
+app.delete("/api/comics/:id", deleteExistingComic);
+
+export default app;

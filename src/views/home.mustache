@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>{{title}}</title>
+        {{>styles}}
+    </head>
+
+    <body>
+        {{>nav}}
+        <div class="container">
+            <header class="hero">
+            <h1>{{title}}</h1>
+            <h2>An personal collection API.</h2>
+            </header>
+
+            <main class="grid">
+                <section class="panel">
+                    <div class="panel-icon">📚</div>
+                    <h3>My Comics</h3>
+                    <p>See the list of your personal comic collection.</p>
+                </section>
+
+                <section class="panel">
+                    <div class="panel-icon">⭐</div>
+                    <h3>Wishlist</h3>
+                    <p>Keep track of the issues and series you're hunting for.</p>
+                </section>
+
+                <section class="panel">
+                    <div class="panel-icon">📖</div>
+                    <h3>Reading List</h3>
+                    <p>What you're reading now, and what's next in the stack.</p>
+                </section>
+
+                <section class="panel">
+                    <div class="panel-icon">📊</div>
+                    <h3>Stats</h3>
+                    <p>Total issues, favorite publishers, and collection highlights.</p>
+                </section>
+            </main>
+        </div>
+    </body>
+</html>

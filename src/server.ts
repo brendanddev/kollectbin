@@ -14,6 +14,7 @@ app.engine('mustache', mustacheExpress());
 app.set('view engine', 'mustache');
 app.set('views', path.join(__dirname, '..', 'src', 'views'));
 
+// Routes
 app.get("/api/comics", getComics);
 app.get("/api/comics/:id", getComic);
 app.post("/api/comics", createComic);

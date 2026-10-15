@@ -1,7 +1,7 @@
 import type { Request, Response } from "express";
 import { initDatabase } from "../db.js";
-import { deleteComic, getAllComics, getComicById, insertComic, updateComic } from "../models/comic.js";
-import type { ComicInput } from "../types/comic.js";
+import { deleteComic, getAllComics, getComicById, getFilteredComics, insertComic, updateComic } from "../models/comic.js";
+import type { ComicFilterOptions, ComicInput } from "../types/comic.js";
 import { parseIdParam, validateComicInput } from "../utils/validators.js";
 
 // Controller logic for the app. Each handler receives an HTTP request, 
@@ -9,12 +9,23 @@ import { parseIdParam, validateComicInput } from "../utils/validators.js";
 
 const db = await initDatabase();
 
-export async function getComics(req: Request, res: Response): Promise<void> { 
-    const allComics = await getAllComics(db);
-    res.json({ message: "success", comics: allComics });
+export async function getComics(req: Request, res: Response): Promise<void> {
+    const options: ComicFilterOptions = {};
+
+    if (req.query.title) options.title = String(req.query.title);
+    if (req.query.volMin !== undefined) options.volMin = Number(req.query.volMin);
+    if (req.query.volMax !== undefined) options.volMax = Number(req.query.volMax);
+
+    try {
+        const comics = await getFilteredComics(db, options);
+        res.json({ message: "success", comics });
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ message: "Database error." });
+    }
 }
 
-export async function getComic(req: Request, res: Response): Promise<void> { 
+export async function getComic(req: Request, res: Response): Promise<void> {
     const comicId = parseIdParam(req.params.id as string);
     if (!comicId) {
         res.status(400).json({ message: "Invalid ID provided." });
@@ -29,13 +40,13 @@ export async function getComic(req: Request, res: Response): Promise<void> {
     res.json({ message: "success", comic: comic });
 }
 
-export async function createComic(req: Request, res: Response): Promise<void> { 
+export async function createComic(req: Request, res: Response): Promise<void> {
     const newComic: ComicInput = req.body;
     if (!validateComicInput(newComic)) {
         res.status(400).json({ message: "Invalid content in request." });
         return;
     }
-    
+
     try {
         const result = await insertComic(db, newComic);
         res.status(201).json({ message: "success", comic: result });
@@ -44,7 +55,7 @@ export async function createComic(req: Request, res: Response): Promise<void> {
     }
 }
 
-export async function editComic(req: Request, res: Response): Promise<void> { 
+export async function editComic(req: Request, res: Response): Promise<void> {
     const comicId = parseIdParam(req.params.id as string);
     if (!comicId) {
         res.status(400).json({ message: "Invalid ID provided." });
@@ -69,7 +80,7 @@ export async function editComic(req: Request, res: Response): Promise<void> {
     }
 }
 
-export async function deleteExistingComic(req: Request, res: Response): Promise<void> { 
+export async function deleteExistingComic(req: Request, res: Response): Promise<void> {
     const comicId = parseIdParam(req.params.id as string);
     if (!comicId) {
         res.status(400).json({ message: "Invalid ID provided." });

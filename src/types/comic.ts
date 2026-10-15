@@ -16,3 +16,9 @@ export interface Comic {
 
 export type ComicInput = Omit<Comic, 'id'>;
 export type UpdateComic = Partial<ComicInput>;
+
+export interface ComicFilterOptions {
+    title?: string;
+    volMax?: number;
+    volMin?: number;
+}

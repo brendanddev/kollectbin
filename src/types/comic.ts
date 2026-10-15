@@ -1,4 +1,7 @@
-export type ComicGenre = 'Fantasy' | 'Action' | 'Mystery';
+// Describes the shape of the Comic types.
+
+export const COMIC_GENRES = ['Fantasy', 'Action', 'Mystery'] as const;
+export type ComicGenre = typeof COMIC_GENRES[number];
 
 export interface Comic {
     id: number;

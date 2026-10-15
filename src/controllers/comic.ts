@@ -1,5 +1,5 @@
 import type { Request, Response } from "express";
-import { initDatabase } from "../db.js";
+import { initDatabase } from "../db/init.js";
 import { deleteComic, getAllComics, getComicById, getFilteredComics, insertComic, updateComic } from "../models/comic.js";
 import type { ComicFilterOptions, ComicInput } from "../types/comic.js";
 import { parseIdParam, validateComicInput } from "../utils/validators.js";

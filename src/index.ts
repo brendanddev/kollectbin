@@ -1,6 +1,6 @@
 import app from "./server.js";
 import { PORT } from "./config/config.js";
-import { initDatabase } from "./db.js";
+import { initDatabase } from "./db/init.js";
 
 const db = await initDatabase();
 console.log(`Database connection created...`);

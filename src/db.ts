@@ -9,12 +9,14 @@ export async function initDatabase(): Promise<Database> {
         filename: DATABASE_NAME,
         driver: sqlite3.Database
     });
-    createTable(db);
+    createComicsTable(db);
+    createBooksTable(db);
+    createUsersTable(db);
     seedDatabase(db);
     return db;
 }
 
-export async function createTable(db: Database): Promise<void> {
+export async function createComicsTable(db: Database): Promise<void> {
     await db.exec(`
         CREATE TABLE IF NOT EXISTS comics (
             id INTEGER PRIMARY KEY,
@@ -25,6 +27,31 @@ export async function createTable(db: Database): Promise<void> {
             publisher TEXT NOT NULL,
             year INTEGER NOT NULL,
             genre TEXT NOT NULL CHECK (genre IN ('Fantasy', 'Action', 'Mystery'))
+        );
+    `);
+}
+
+export async function createBooksTable(db: Database): Promise<void> {
+    await db.exec(`
+        CREATE TABLE IF NOT EXISTS books (
+            id INTEGER PRIMARY KEY,
+            isbn TEXT NOT NULL,
+            title TEXT NOT NULL,
+            author TEXT NOT NULL,
+            publisher TEXT NOT NULL,
+            year INTEGER NOT NULL,
+            genre TEXT NOT NULL
+        );
+    `);
+}
+
+export async function createUsersTable(db: Database): Promise<void> {
+    await db.exec(`
+        CREATE TABLE IF NOT EXISTS users (
+            id INTEGER PRIMARY KEY,
+            email TEXT NOT NULL,
+            username TEXT NOT NULL,
+            password TEXT NOT NULL
         );
     `);
 }

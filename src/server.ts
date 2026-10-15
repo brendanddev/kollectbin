@@ -21,4 +21,9 @@ app.post("/api/comics", createComic);
 app.put("/api/comics/:id", editComic);
 app.delete("/api/comics/:id", deleteExistingComic);
 
+// app.get("/api/user", getUser);
+// app.post("/api/user", insertUser);
+// app.put("/api/user/:id", updateUser);
+// app.delete("/api/user/:id", removeUser);
+
 export default app;
